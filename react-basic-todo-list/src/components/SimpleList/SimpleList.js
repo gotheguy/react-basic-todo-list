@@ -1,62 +1,60 @@
-// import React from 'react';
-
-// const listItem = (props) => (
-//     <ul>{ props.items.map((item, index) => <li key={index}>{item}</li>) }
-//   </ul>
-// );
-
-// export default listItem;
-
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
+import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 360,
+    maxWidth: 570,
     backgroundColor: theme.palette.background.paper,
+    marginTop: 30,
   },
+  grid: {
+    maxWidth: 'none'
+  }
 }));
 
-function generate(element) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
+const CustomCheckbox = withStyles({
+  root: {
+    color: 'rgba(0, 0, 0, 0.54)',
+    '&$checked': {
+      color: '#00bcd4',
+    },
+  },
+  checked: {},
+})(props => <Checkbox color="default" {...props} />);
 
 const SimpleList = (props) => {
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
+  // const handleChange = (event) => {
+  //   setState({ ...state, [event.target.name]: event.target.checked });
+  // };
 
   return (
     <div className={classes.root}>
-        <Grid item xs={12} md={6}>
-          <Typography variant="h6" className={classes.title}>
-          <ul>{ props.items.map((item, index) => <li key={index}>{item}</li>) }</ul>
-          </Typography>
+        <Grid item xs={12} md={6} className={classes.grid}>
+          <Typography variant="h6" className={classes.title}></Typography>
           <div className={classes.demo}>
-            <List dense={dense}>
-              {generate(
+            <List>
+            { props.items.map((item, index) => 
                 <ListItem>
                   <ListItemIcon>
-                    <FolderIcon />
+                    <CustomCheckbox size="small" />
                   </ListItemIcon>
-                  <ListItemText
-                    primary={props.items}
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-                </ListItem>,
-              )}
+                  <ListItemText primary={item} />
+                  <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+              </ListItem>
+            )}
             </List>
           </div>
         </Grid>
