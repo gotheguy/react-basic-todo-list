@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Auxiliary from '../../hoc/Auxiliary';
 import Button from '../../components/UI/Button/Button';
-import ListItem from '../../components/ListItem/ListItem';
+import SimpleList from '../../components/SimpleList/SimpleList';
 import Input from '../../components/UI/Input/Input';
 import './TodoList.css';
 
@@ -29,7 +29,7 @@ class TodoList extends Component {
             <Auxiliary>
                 <Input value={this.state.term} onChange={this.onChange} />
                 <Button clicked={this.addItemHandler} />
-                <ListItem items={this.state.items} /> 
+                <SimpleList items={this.state.items} /> 
             </Auxiliary>
         );
     }
