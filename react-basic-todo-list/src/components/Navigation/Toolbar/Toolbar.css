@@ -1,0 +1,13 @@
+.Toolbar {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #66c2a5;
+    padding: 0 20px;
+    margin-bottom: 50px;
+}
+
+.AppName {
+    color: white;
+}
