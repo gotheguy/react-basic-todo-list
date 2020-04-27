@@ -1,0 +1,7 @@
+.Grid {
+    width: '100%';
+    max-width: 570px !important;
+    margin-top: 20px !important;
+    background-color: white;
+    border-radius: 3px;
+}
