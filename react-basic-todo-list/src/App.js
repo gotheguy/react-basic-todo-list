@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 
 import Layout from './containers/Layout/Layout';
 import TodoList from './containers/TodoList/TodoList';

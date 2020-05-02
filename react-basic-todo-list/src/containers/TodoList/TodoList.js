@@ -4,6 +4,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -59,23 +60,27 @@ class TodoList extends Component {
                 <Input value={this.state.term} onChange={this.onChange} />
                 <Button clicked={this.addItemHandler} />
                 <div className="Root">
-                    <Grid item xs={12} md={6} className="Grid" style={ this.state.items.length <= 0 ? { display: "none" }: {}}>
-                        <Typography variant="h6"></Typography>
-                        <div>
-                        <List>
-                        { this.state.items.map((item, index) => 
-                            <ListItem key={index}>
-                                <ListItemIcon>
-                                    <CustomCheckbox size="small" onChange={this.checkedItemHandler.bind(this, index)} />
-                                </ListItemIcon>
-                                <ListItemText style={ item.checked ? { color: "#989898", textDecoration: 'line-through' } : {}} primary={item.term} />
-                                <IconButton edge="end" aria-label="delete">
-                                    <DeleteIcon className="DeleteIcon" onClick={this.deleteItemHandler.bind(this, index)} />
-                                </IconButton>
-                            </ListItem>
-                        )}
-                        </List>
-                        </div>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={12} style={ this.state.items.length <= 0 ? { display: "none" }: {}}>
+                        <Paper className="Paper">
+                            <Typography variant="h6"></Typography>
+                            <div>
+                            <List>
+                            { this.state.items.map((item, index) => 
+                                <ListItem key={index}>
+                                    <ListItemIcon>
+                                        <CustomCheckbox size="small" onChange={this.checkedItemHandler.bind(this, index)} />
+                                    </ListItemIcon>
+                                    <ListItemText style={ item.checked ? { color: "#989898", textDecoration: 'line-through' } : {}} primary={item.term} />
+                                    <IconButton edge="end" aria-label="delete">
+                                        <DeleteIcon className="DeleteIcon" onClick={this.deleteItemHandler.bind(this, index)} />
+                                    </IconButton>
+                                </ListItem>
+                            )}
+                            </List>
+                            </div>
+                            </Paper>
+                        </Grid>
                     </Grid>
                 </div>
             </Auxiliary>
