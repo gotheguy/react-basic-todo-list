@@ -1,30 +1,10 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import uuid from 'react-uuid'
 
 import Auxiliary from '../../hoc/Auxiliary';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
-import './TodoList.css';
-
-const CustomCheckbox = withStyles({
-    root: {
-      color: 'rgba(0, 0, 0, 0.54)',
-      '&$checked': {
-        color: '#00bcd4',
-      },
-    },
-    checked: { },
-  })(props => <Checkbox color="default" {...props} />);
+import CustomList from './CustomList';
 
 class TodoList extends Component {
     state = {
@@ -38,7 +18,7 @@ class TodoList extends Component {
     addItemHandler = (event) => {
         event.preventDefault();
         this.setState({
-            items: [...this.state.items, {term: this.state.term, checked: false}]
+            items: [...this.state.items, {id: uuid(), term: this.state.term, checked: false}]
         });
     }
 
@@ -59,30 +39,7 @@ class TodoList extends Component {
             <Auxiliary>
                 <Input value={this.state.term} onChange={this.onChange} />
                 <Button clicked={this.addItemHandler} />
-                <div className="Root">
-                <Grid container spacing={2}>
-                    <Grid item xs={12} sm={12} style={ this.state.items.length <= 0 ? { display: "none" }: {}}>
-                        <Paper className="Paper">
-                            <Typography variant="h6"></Typography>
-                            <div>
-                            <List>
-                            { this.state.items.map((item, index) => 
-                                <ListItem key={index}>
-                                    <ListItemIcon>
-                                        <CustomCheckbox size="small" onChange={this.checkedItemHandler.bind(this, index)} />
-                                    </ListItemIcon>
-                                    <ListItemText style={ item.checked ? { color: "#989898", textDecoration: 'line-through' } : {}} primary={item.term} />
-                                    <IconButton edge="end" aria-label="delete">
-                                        <DeleteIcon className="DeleteIcon" onClick={this.deleteItemHandler.bind(this, index)} />
-                                    </IconButton>
-                                </ListItem>
-                            )}
-                            </List>
-                            </div>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </div>
+                <CustomList items={this.state.items} checkedItemHandler={this.checkedItemHandler} deleteItemHandler={this.deleteItemHandler} />
             </Auxiliary>
         );
     }

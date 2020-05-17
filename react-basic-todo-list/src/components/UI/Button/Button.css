@@ -1,11 +1,17 @@
 .Button {
     width: 55px;
-    height: 31px;
+    height: 41px;
     padding: 7px 15px;
     background-color: #2ca0ef;
-    border: none;
+    border: 1px solid #2ca0ef;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     color: white;
     cursor: pointer;
+}
+
+@media (max-width: 615px) {
+    .Button {
+        display: none;
+    }
 }
